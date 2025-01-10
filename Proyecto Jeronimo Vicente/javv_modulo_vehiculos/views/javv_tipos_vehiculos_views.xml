@@ -82,11 +82,9 @@
                         <div class="o_kanban_record_title">
                             <strong><field name="name"/></strong>
                         </div>
-                        <!-- Mostrar clasificación en una línea separada -->
                         <t t-if="record.clasificacion_energetica.raw_value == '0' or record.clasificacion_energetica.raw_value == 'Eco' or record.clasificacion_energetica.raw_value == 'eco'">
                             <div>Clasificación: <field name="clasificacion_energetica"/></div>
                         </t>
-                        <!-- Mostrar enganche en otra línea -->
                         <t t-if="record.enganche_carro.raw_value">
                             <div>Enganche para carro disponible</div>
                         </t>

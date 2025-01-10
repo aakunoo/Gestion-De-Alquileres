@@ -134,7 +134,7 @@
     <field name="name">javv.vehiculos.kanban</field>
     <field name="model">javv.vehiculos</field>
     <field name="arch" type="xml">
-        <kanban default_group_by="tipo_vehiculo_id" create_group="true" quick_create="true">
+        <kanban default_group_by="tipo_vehiculo_id" create_group="true" quick_create="true" draggable="false">
             <field name="tipo_vehiculo_id"/>
             <field name="state"/>
             <field name="name"/>
@@ -148,17 +148,13 @@
                         <div class="o_kanban_record_title">
                             <strong><field name="name"/></strong>
                         </div>
-                        <div>
-                            <t t-if="record.state.raw_value == 'alquilado'">
-                                <span><field name="precio_diario" string="Precio Diario: "/></span>
-                            </t>
-                            <t t-if="record.state.raw_value == 'en_reparacion'">
-                                <span><field name="state" string="Estado: "/></span>
-                            </t>
-                        </div>
-                        <div>
-                            <field name="matricula" string="Matrícula: "/>
-                        </div>
+                        <t t-if="record.state.raw_value == 'alquilado'">
+                            <div>Precio Diario: <field name="precio_diario"/></div>
+                        </t>
+                        <t t-if="record.state.raw_value == 'en_reparacion'">
+                            <div>Estado: <field name="state"/></div>
+                        </t>
+                        <div>Matrícula: <field name="matricula"/></div>
                         <div>
                             <field name="caracteristicas_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                         </div>
@@ -168,5 +164,6 @@
         </kanban>
     </field>
 </record>
+
 
 </odoo>

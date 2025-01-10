@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Acción del Informe -->
+    <report
+        id="report_vehiculos_seleccionados"
+        model="javv.vehiculos"
+        string="Informe de Vehículos Seleccionados"
+        report_type="qweb-pdf"
+        name="javv_modulo_vehiculos.report_vehiculos"
+        file="javv_modulo_vehiculos.report_vehiculos"
+        print_report_name="'Informe_Vehiculos_' + object.name"
+    />
+
+    <!-- Plantilla principal -->
+    <template id="report_vehiculos">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="vehiculo">
+                <t t-call="javv_modulo_vehiculos.report_vehiculos_main"/>
+            </t>
+        </t>
+    </template>
+
+    <!-- Subplantilla principal -->
+    <template id="report_vehiculos_main">
+        <t t-call="web.external_layout">
+            <div class="page" style="page-height:240mm; page-width:180mm; margin:22mm; page-orientation:portrait;">
+                <!-- Cabecera -->
+                <header style="margin-top:23mm;">
+                    <h2 style="font-size: 20px; text-align: center;">Informe de Vehículo</h2>
+                </header>
+
+                <!-- Contenido del informe -->
+                <p><strong>Nombre:</strong> <span t-field="vehiculo.name"/></p>
+                <p><strong>Código:</strong> <span t-field="vehiculo.codigo"/></p>
+                <p><strong>Matrícula:</strong> <span t-field="vehiculo.matricula"/></p>
+                <p><strong>Número de Plazas:</strong> <span t-field="vehiculo.num_plazas"/></p>
+                <p><strong>Fecha de Fabricación:</strong> <span t-field="vehiculo.fecha_fabricacion"/></p>
+                <p><strong>Precio Diario:</strong> <span t-field="vehiculo.precio_diario"/></p>
+                <p><strong>Precio Semanal:</strong> <span t-field="vehiculo.precio_semanal"/></p>
+
+                <!-- Llamada a la subplantilla -->
+                <t t-call="javv_modulo_vehiculos.report_alquileres_sub"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- Subplantilla para los alquileres -->
+    <template id="report_alquileres_sub">
+        <table class="table table-sm" style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="border-bottom: 1px solid black;">
+                    <th>Cliente</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Duración</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="vehiculo.alquileres_ids" t-as="alquiler">
+                    <tr>
+                        <td><span t-field="alquiler.cliente_id.name"/></td>
+                        <td><span t-field="alquiler.fecha_inicio"/></td>
+                        <td><span t-field="alquiler.fecha_fin"/></td>
+                        <td><span t-field="alquiler.duracion"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+</odoo>
