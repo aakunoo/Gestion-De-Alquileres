@@ -36,7 +36,7 @@ class javv_vehiculos(models.Model):
     def _generate_codigo():
         from datetime import datetime
         current_date = datetime.now().strftime("%d%m%Y")
-        user_id = random.randint(1, 999)  # Usamos un identificador simulado
+        user_id = random.randint(1, 999)
         return f"{user_id}-{current_date}"
 
     @api.depends('fecha_fabricacion')

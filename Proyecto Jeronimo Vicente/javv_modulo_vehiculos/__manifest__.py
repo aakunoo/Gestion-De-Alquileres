@@ -14,7 +14,7 @@
         'views/javv_menus.xml',
         'views/javv_herencia_views.xml',
         'data/javv_neumaticos_data.xml',
-        'reports/javv_vehiculos_reports.xml',
+        'reports/javv_informes_vehiculos.xml',
     ],
     'assets': {
         'web.assets_backend': [

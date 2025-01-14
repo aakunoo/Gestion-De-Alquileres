@@ -44,7 +44,7 @@
         <field name="name">javv.alquileres_vehiculos.tree</field>
         <field name="model">javv.alquileres_vehiculos</field>
         <field name="arch" type="xml">
-            <tree decoration-success="state in ('en_proceso', 'terminado')"
+            <tree decoration-success="state == 'terminado' or state == 'en_proceso'"
                   decoration-danger="decoration_state == 'rojo'"
                   decoration-warning="state == 'previo'"
                   decoration-primary="state == 'facturado'">
