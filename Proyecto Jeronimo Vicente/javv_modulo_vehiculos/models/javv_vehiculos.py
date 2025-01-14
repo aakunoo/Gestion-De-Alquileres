@@ -144,3 +144,23 @@ class javv_vehiculos(models.Model):
         'vehiculo_id',
         string="Alquileres Asociados"
     )
+
+    def action_open_generar_matricula_wizard(self):
+        self.ensure_one()
+        matricula = self.matricula or ""
+        # Tomamos los 4 primeros caracteres como parte numérica, el resto como letras
+        parte_num = matricula[:4]
+        parte_letras = matricula[4:]
+
+        return {
+            'name': 'Generar Matrícula',
+            'type': 'ir.actions.act_window',
+            'res_model': 'javv.generar_matricula_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_vehiculo_id': self.id,
+                'default_numeros': parte_num,
+                'default_letras': parte_letras,
+            }
+        }

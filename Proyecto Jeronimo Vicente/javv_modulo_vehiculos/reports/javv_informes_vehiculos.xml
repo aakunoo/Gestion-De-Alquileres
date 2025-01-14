@@ -42,9 +42,9 @@
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
 
-                    <div class="page">
+                    <div class="page" style="font-size:25px;">
                         <!-- Encabezado con nombre y código -->
-                        <h2 style="font-size: 18px;">
+                        <h2 style="font-size: 35px;">
                             <span t-field="vehiculo.name"/>
                             (<span t-field="vehiculo.codigo"/>)
                         </h2>

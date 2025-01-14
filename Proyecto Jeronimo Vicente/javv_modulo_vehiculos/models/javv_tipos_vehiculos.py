@@ -73,3 +73,16 @@ class javv_tipos_vehiculos(models.Model):
             if record.enganche_carro:
                 display.append("Enganche para carro disponible")
             record.kanban_clasificacion_display = "\n".join(display)
+
+    def action_open_clasificacion_wizard(self):
+        self.ensure_one()
+        return {
+            'name': 'Elegir Clasificación',
+            'type': 'ir.actions.act_window',
+            'res_model': 'javv.clasificacion_energetica_wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_tipo_vehiculo_id': self.id,
+            }
+        }

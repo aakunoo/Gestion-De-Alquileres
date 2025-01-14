@@ -56,6 +56,10 @@
                     <group colspan="2">
                         <group>
                             <field name="matricula"/>
+                            <button name="action_open_generar_matricula_wizard"
+                            string="Generar Matrícula"
+                            type="object"
+                            class="oe_highlight o_genera_matricula_btn"/>
                             <field name="tipo_vehiculo_id"/>
                             <field name="numero_alquileres" readonly="1"/>
                         </group>
@@ -164,6 +168,5 @@
         </kanban>
     </field>
 </record>
-
 
 </odoo>

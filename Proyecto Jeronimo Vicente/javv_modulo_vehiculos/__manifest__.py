@@ -15,10 +15,16 @@
         'views/javv_herencia_views.xml',
         'data/javv_neumaticos_data.xml',
         'reports/javv_informes_vehiculos.xml',
+        'reports/javv_informes_alquileres_usuarios.xml',
+        'reports/javv_informe_vehiculos_heredado.xml',
+        'wizards/javv_generar_matricula_wizard_views.xml',
+        'wizards/javv_clasificacion_energetica_wizard_views.xml',
     ],
     'assets': {
         'web.assets_backend': [
             'javv_modulo_vehiculos/static/src/css/alquileres.css',
+            'javv_modulo_vehiculos/static/src/css/custom_styles.css',
+
         ],
     },
     'application': True,

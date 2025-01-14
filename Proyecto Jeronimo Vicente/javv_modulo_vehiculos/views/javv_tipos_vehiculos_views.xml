@@ -30,6 +30,11 @@
                     <group>
                         <field name="name"/>
                         <field name="clasificacion_energetica"/>
+                        <button name="action_open_clasificacion_wizard"
+                            string="Elegir clasificación"
+                            type="object"
+                            class="oe_highlight o_genera_matricula_btn"
+                            nolabel="1"/>
                         <field name="enganche_carro"/>
                     </group>
                     <notebook>

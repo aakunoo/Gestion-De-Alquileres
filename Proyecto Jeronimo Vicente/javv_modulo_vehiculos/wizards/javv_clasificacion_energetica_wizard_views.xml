@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Vista Form del Wizard -->
+    <record id="view_javv_clasificacion_energetica_wizard_form" model="ir.ui.view">
+        <field name="name">javv.clasificacion_energetica_wizard.form</field>
+        <field name="model">javv.clasificacion_energetica_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Elegir Clasificación Energética">
+                <!-- Relación con el tipo de vehículo, oculto -->
+                <field name="tipo_vehiculo_id" invisible="1"/>
+
+                <group>
+                    <field name="opcion_combustible" string="Combustible"/>
+                </group>
+
+                <footer>
+                    <button name="action_aceptar"
+                            string="Aceptar"
+                            type="object"
+                            class="btn-primary"/>
+                    <button name="action_cancelar"
+                            string="Cancelar"
+                            type="object"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción para abrir este wizard en ventana modal -->
+    <record id="action_javv_clasificacion_energetica_wizard" model="ir.actions.act_window">
+        <field name="name">Elegir Clasificación</field>
+        <field name="res_model">javv.clasificacion_energetica_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

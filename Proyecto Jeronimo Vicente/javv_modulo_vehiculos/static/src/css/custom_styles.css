@@ -1,3 +1,6 @@
-.o_custom_button_spacing {
-    margin-left: 10px !important;
+.o_genera_matricula_btn {
+    margin: 0 0 15px -5px;
+    background-color: #71639e;
+    color: #ecf1ff;
+    border-radius: 5px;
 }
