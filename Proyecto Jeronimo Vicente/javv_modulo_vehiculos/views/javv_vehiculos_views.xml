@@ -12,8 +12,17 @@
         <field name="name">javv.vehiculos.tree</field>
         <field name="model">javv.vehiculos</field>
         <field name="arch" type="xml">
-            <tree decoration-success="decoration_state in ('success', 'success_bold')"
-                    decoration-danger="decoration_state == 'danger_italic'">
+            <tree decoration-success="state == 'disponible' or state == 'alquilado'"
+                  decoration-bf="state == 'alquilado'"
+                  decoration-danger = "state == 'en_reparacion'"
+                  decoration-it = "state == 'en_reparacion'">
+
+                <header>
+                <button name="action_ver_modificar_recordset"
+                string="Ver y modificar Recordset"
+                type="object"
+                class="btn-primary o_custom_margin"/>
+                </header>
                  <field name="name"/>
                 <field name="codigo"/>
                 <field name="matricula"/>
@@ -25,7 +34,7 @@
                 <field name="precio_diario"/>
                 <field name="numero_alquileres"/>
                 <field name="state" readonly="1"/>
-                <field name="decoration_state" invisible="1"/>
+                <!-- <field name="decoration_state" invisible="1"/>-->
             </tree>
         </field>
     </record>

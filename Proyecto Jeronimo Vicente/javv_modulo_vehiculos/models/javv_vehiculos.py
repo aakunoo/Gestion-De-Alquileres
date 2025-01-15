@@ -1,6 +1,6 @@
 from odoo import fields, models, api
 from datetime import timedelta
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 import random
 import logging
 
@@ -78,16 +78,16 @@ class javv_vehiculos(models.Model):
         ('en_reparacion', 'En Reparación')
     ], string="Estado", default='disponible', readonly=True)
 
-    decoration_state = fields.Char(compute="_compute_decoration_state", string="Decoration State")
+    #decoration_state = fields.Char(compute="_compute_decoration_state", string="Decoration State")
 
-    def _compute_decoration_state(self):
-        for record in self:
-            if record.state == 'disponible':
-                record.decoration_state = 'success'
-            elif record.state == 'alquilado':
-                record.decoration_state = 'success_bold'
-            elif record.state == 'en_reparacion':
-                record.decoration_state = 'danger_italic'
+    #def _compute_decoration_state(self):
+     #   for record in self:
+      #      if record.state == 'disponible':
+       #         record.decoration_state = 'success'
+        #    elif record.state == 'alquilado':
+         #       record.decoration_state = 'success_bold'
+          #  elif record.state == 'en_reparacion':
+           #     record.decoration_state = 'danger_italic'
 
     _sql_constraints = [
         ('unique_matricula', 'unique(matricula)', 'La matrícula debe ser única.'),
@@ -164,3 +164,59 @@ class javv_vehiculos(models.Model):
                 'default_letras': parte_letras,
             }
         }
+
+    def action_ver_modificar_recordset(self):
+        """
+        Botón en la vista tree que:
+          1) Muestra info de cada vehículo y un resumen global en un UserError.
+          2) Deja maletero=False en todos los vehículos seleccionados.
+        """
+        if not self:
+            # Si no se seleccionó nada
+            raise UserError("No se han seleccionado vehículos.")
+
+        # 1) Recolectar información detallada
+        lineas_info = []
+        for veh in self:
+            nombre_vehiculo = veh.name or "Sin nombre"
+            matricula_veh = veh.matricula or "Sin matrícula"
+            fecha_fab = veh.fecha_fabricacion or "Sin fecha de fabricación"
+            fecha_itv = veh.fecha_itv or "Sin fecha ITV"
+
+            # Tipo de vehículo y su clasif. energética
+            tipo = veh.tipo_vehiculo_id
+            nombre_tipo = tipo.name or "Sin tipo"
+            clasif = tipo.clasificacion_energetica or "sin_clasificar"
+
+            # Construimos una línea de texto
+            info_linea = (
+                f"Vehículo: {nombre_vehiculo}\n"
+                f"  - Matrícula: {matricula_veh}\n"
+                f"  - Fecha Fabricación: {fecha_fab}\n"
+                f"  - Fecha ITV: {fecha_itv}\n"
+                f"  - Tipo: {nombre_tipo} (Clasificación: {clasif})\n"
+            )
+            lineas_info.append(info_linea)
+
+        # 2) Suma de numero_alquileres y media de precio_diario
+        total_alquileres = sum(veh.numero_alquileres for veh in self)
+        total_vehiculos = len(self)
+        total_precio_diario = sum(veh.precio_diario for veh in self)
+        media_precio = 0
+        if total_vehiculos > 0:
+            media_precio = total_precio_diario / total_vehiculos
+
+        # 3) Modificar maletero a False
+        self.write({'maletero': False})
+
+        # 4) Lanzar UserError con la información
+        # Construimos el mensaje final
+        info_vehiculos = "\n".join(lineas_info)
+        info_resumen = (
+            f"\n---\n"
+            f"Suma de número de alquileres (todos): {total_alquileres}\n"
+            f"Media de precio diario: {media_precio:.2f}\n"
+        )
+        mensaje = f"{info_vehiculos}{info_resumen}"
+
+        raise UserError(mensaje)

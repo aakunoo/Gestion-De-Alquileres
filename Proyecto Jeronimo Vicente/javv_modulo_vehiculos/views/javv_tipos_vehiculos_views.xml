@@ -106,4 +106,21 @@
         <field name="view_mode">tree,form,kanban</field>
         <field name="search_view_id" ref="view_javv_tipos_vehiculos_search"/>
     </record>
+
+    <record id="javv_server_action_generar_tipo_vehiculo" model="ir.actions.server">
+        <field name="name">Generar tipo de vehiculo</field>
+        <field name="model_id" ref="model_javv_tipos_vehiculos"/>
+        <field name="state">code</field>
+        <field name="code">
+            model.generate_tipo_vehiculo_sql()
+        </field>
+    </record>
+
+    <menuitem id="javv_submenu_generate_tipo_vehiculo"
+              name="Generar tipo de vehiculo"
+              parent="javv_menu_opciones"
+              sequence="35"
+              action="javv_server_action_generar_tipo_vehiculo"/>
+
+
 </odoo>

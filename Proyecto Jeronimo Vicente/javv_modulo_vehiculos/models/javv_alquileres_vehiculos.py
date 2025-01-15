@@ -22,21 +22,21 @@ class javv_alquileres_vehiculos(models.Model):
     ], string="Estado", default='previo', required=True)
 
 
-    decoration_state = fields.Char(compute="_compute_decoration_state", string="Decoration State")
+    #decoration_state = fields.Char(compute="_compute_decoration_state", string="Decoration State")
 
-    @api.depends('state')
-    def _compute_decoration_state(self):
-        for record in self:
-            if record.state == 'previo':
-                record.decoration_state = 'marron_claro'
-            elif record.state in ['en_proceso', 'terminado']:
-                record.decoration_state = 'verde'
-            elif record.state == 'facturado':
-                record.decoration_state = 'purpura'
-            elif record.state == 'cancelado':
-                record.decoration_state = 'rojo'
-            else:
-                record.decoration_state = False
+    #@api.depends('state')
+    #def _compute_decoration_state(self):
+     #   for record in self:
+      #      if record.state == 'previo':
+       #         record.decoration_state = 'marron_claro'
+       #     elif record.state in ['en_proceso', 'terminado']:
+        #        record.decoration_state = 'verde'
+         #   elif record.state == 'facturado':
+          #      record.decoration_state = 'purpura'
+           # elif record.state == 'cancelado':
+            #    record.decoration_state = 'rojo'
+            #else:
+             #   record.decoration_state = False
     # Relaciones
     vehiculo_id = fields.Many2one('javv.vehiculos', string="Vehículo", required=True)
     usuario_id = fields.Many2one('res.users', string="Usuario que gestiona", default=lambda self: self.env.user)

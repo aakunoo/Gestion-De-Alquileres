@@ -45,9 +45,11 @@
         <field name="model">javv.alquileres_vehiculos</field>
         <field name="arch" type="xml">
             <tree decoration-success="state == 'terminado' or state == 'en_proceso'"
-                  decoration-danger="decoration_state == 'rojo'"
+                  decoration-bf="state == 'terminado'"
+                  decoration-danger="state == 'cancelado'"
                   decoration-warning="state == 'previo'"
-                  decoration-primary="state == 'facturado'">
+                  decoration-primary="state == 'facturado'"
+                  decoration-it ="state == 'facturado'">
                 <header>
                     <!-- Botón con clase personalizada para añadir margen -->
                     <button name="action_comprobar_alquileres" string="Comprobar Alquileres" type="object"
@@ -62,7 +64,6 @@
                     <field name="precio_final"/>
                     <button name="action_comprobar_estado_individual" type="object" icon="fa-check-square" string="Actualizar Estado"/>
                     <field name="state" readonly="1"/>
-                    <field name="decoration_state" invisible="1"/>
             </tree>
         </field>
     </record>
