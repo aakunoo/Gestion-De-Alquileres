@@ -1,42 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Menú raíz -->
     <menuitem id="javv_menu_root" name="Alquiler de Vehículos" sequence="10"/>
-
-    <!-- Menú de primer nivel: Vehículos/Alquiler -->
     <menuitem id="javv_menu_vehiculos_alquiler"
               name="Vehículos - Alquiler"
               parent="javv_menu_root"
               sequence="20"/>
 
-    <!-- Submenú Vehículos -->
     <menuitem id="javv_menu_vehiculos"
               name="Vehículos"
               parent="javv_menu_vehiculos_alquiler"
               sequence="21"
               action="action_javv_vehiculos"/>
 
-    <!-- Submenú Alquileres de Vehículos -->
     <menuitem id="javv_menu_alquileres"
               name="Alquileres de Vehículos"
               parent="javv_menu_vehiculos_alquiler"
               sequence="22"
               action="action_javv_alquileres"/>
 
-    <!-- Menú de primer nivel: Opciones -->
     <menuitem id="javv_menu_opciones"
               name="Opciones"
               parent="javv_menu_root"
               sequence="30"/>
 
-    <!-- Submenú Tipos de Vehículos -->
     <menuitem id="javv_menu_tipos_vehiculos"
               name="Tipos de Vehículos"
               parent="javv_menu_opciones"
               sequence="31"
               action="action_javv_tipos_vehiculos"/>
 
-    <!-- Submenú Características Especiales -->
     <menuitem id="javv_menu_caracteristicas"
               name="Características Especiales"
               parent="javv_menu_opciones"

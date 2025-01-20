@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Acción para abrir la vista de Vehículos -->
+    <!-- Acción para Vehículos -->
     <record id="action_javv_vehiculos" model="ir.actions.act_window">
         <field name="name">Vehículos</field>
         <field name="res_model">javv.vehiculos</field>
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
-    <!-- Vista de lista (Tree) de Vehículos -->
+    <!-- Vista Tree -->
     <record id="view_javv_vehiculos_tree" model="ir.ui.view">
         <field name="name">javv.vehiculos.tree</field>
         <field name="model">javv.vehiculos</field>
@@ -16,7 +16,6 @@
                   decoration-bf="state == 'alquilado'"
                   decoration-danger = "state == 'en_reparacion'"
                   decoration-it = "state == 'en_reparacion'">
-
                 <header>
                 <button name="action_ver_modificar_recordset"
                 string="Ver y modificar Recordset"
@@ -39,7 +38,7 @@
         </field>
     </record>
 
-    <!-- Vista de formulario de Vehículos -->
+    <!-- Vista form -->
     <record id="view_javv_vehiculos_form" model="ir.ui.view">
         <field name="name">javv.vehiculos.form</field>
         <field name="model">javv.vehiculos</field>
@@ -55,13 +54,9 @@
                             <field name="codigo" class="vehiculo-codigo" readonly="1"/>
                         </h1>
                     </group>
-
-                    <!-- Características especiales en forma de etiquetas -->
                     <group>
                         <field name="caracteristicas_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                     </group>
-
-                    <!-- Campos en dos columnas -->
                     <group colspan="2">
                         <group>
                             <field name="matricula"/>
@@ -116,25 +111,19 @@
         </field>
     </record>
 
-    <!-- Vista de búsqueda para Vehículos -->
+    <!-- Vista búsqueda -->
     <record id="view_javv_vehiculos_search" model="ir.ui.view">
         <field name="name">javv.vehiculos.search</field>
         <field name="model">javv.vehiculos</field>
         <field name="arch" type="xml">
             <search>
-                <!-- Campos para búsqueda -->
                 <field name="name"/>
                 <field name="codigo"/>
                 <field name="matricula"/>
                 <field name="fecha_fabricacion"/>
                 <field name="combustible"/>
-
-                <!-- Filtros -->
                 <filter name="filter_berlina" string="Sólo Berlina" domain="[('tipo_vehiculo_id.name', '=', 'Berlina')]"/>
                 <filter name="filter_fecha_fabricacion" string="Fecha Fabricación" domain="[('fecha_fabricacion', '>=', (context_today()))]"/>
-
-
-                <!-- Agrupaciones -->
                 <group expand="1" string="Agrupar por">
                     <filter name="group_num_plazas" string="Número de Plazas" context="{'group_by': 'num_plazas'}"/>
                 </group>

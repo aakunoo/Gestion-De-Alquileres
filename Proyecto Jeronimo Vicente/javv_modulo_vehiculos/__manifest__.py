@@ -1,7 +1,7 @@
 {
     'name': 'Alquiler de Vehiculos',
     'summary': 'Gestión básica de vehículos.',
-    'description': 'Módulo de prueba con el modelo principal de vehículos.',
+    'description': 'Módulo para la gestión de vehículos y alquileres. Proyecto final de SGE.',
     'author': 'Jerónimo Álvaro Vicente Vidal',
     'license': 'LGPL-3',
     'depends': ['base', 'account'],

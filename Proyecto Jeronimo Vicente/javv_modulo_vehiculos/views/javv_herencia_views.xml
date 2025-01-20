@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Herencia de la vista formulario de res.partner -->
+    <!-- Herencia form res.partner -->
     <record id="view_res_partner_form_inherit_alquileres" model="ir.ui.view">
         <field name="name">res.partner.form.alquileres.inherit</field>
         <field name="model">res.partner</field>

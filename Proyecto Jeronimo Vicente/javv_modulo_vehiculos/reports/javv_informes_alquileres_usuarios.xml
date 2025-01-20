@@ -1,58 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- 1) ACCIÓN DE INFORME PARA USUARIOS -->
+    <!-- ACCIÓN INFORME -->
     <record id="javv_informe_alquileres_por_usuario_report" model="ir.actions.report">
-        <!-- Nombre que verás en el desplegable de “Imprimir” -->
         <field name="name">Informe de Alquileres por Usuario</field>
-
-        <!-- Modelo principal: res.users -->
         <field name="model">res.users</field>
-
-        <!-- Tipo de informe: PDF por QWeb -->
         <field name="report_type">qweb-pdf</field>
-
-        <!-- Nombre que debe coincidir con el “id” de la plantilla principal que definimos abajo -->
         <field name="report_name">javv_modulo_vehiculos.informe_alquileres_por_usuario_template</field>
         <field name="report_file">javv_modulo_vehiculos.informe_alquileres_por_usuario_template</field>
-
-        <!-- Reutilizamos el mismo formato de papel del informe de vehículos -->
-        <!-- Sustituye “javv_formato_informe_vehiculos” por el id que uses en tu módulo -->
         <field name="paperformat_id" ref="javv_formato_informe_vehiculos"/>
-
-        <!-- Nombre que tendrá el PDF descargado -->
         <field name="print_report_name">'Informe Alquileres de Usuario'</field>
-
-        <!-- Para que aparezca el botón “Imprimir → Informe de Alquileres por Usuario” en la vista de res.users -->
         <field name="binding_model_id" ref="base.model_res_users"/>
         <field name="binding_type">report</field>
     </record>
 
 
-    <!-- 2) PLANTILLA PRINCIPAL -->
+    <!-- PLANTILLA PRINCIPAL -->
     <template id="informe_alquileres_por_usuario_template">
-        <!-- “docs” serán los usuarios que selecciones al imprimir -->
         <t t-foreach="docs" t-as="usuario">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
 
                     <div class="page" style="font-size:25px;">
 
-                        <!-- (A) Nombre del usuario en grande -->
                         <h2 style="font-size: 35px;">
                             <span t-field="usuario.name"/>
                         </h2>
 
-                        <!-- (B) Reunimos los alquileres de ese usuario;
-                             básicamente: “todos los javv.alquileres_vehiculos donde usuario_id = usuario.id” -->
                         <t t-set="alquileres_del_usuario"
                            t-value="usuario.env['javv.alquileres_vehiculos'].search([('usuario_id','=', usuario.id)])"/>
 
-                        <!-- (C) Llamamos a la SUBPLANTILLA (ya existente) pasándole “alquileres_del_usuario” -->
                         <t t-call="javv_modulo_vehiculos.informe_vehiculos_subtemplate_alquileres">
                             <t t-set="alquileres" t-value="alquileres_del_usuario"/>
                         </t>
 
-                    </div><!-- /page -->
+                    </div>
 
                 </t>
             </t>

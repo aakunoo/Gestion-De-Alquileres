@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- 1) PAPER FORMAT -->
+    <!-- PAPER FORMAT -->
     <record id="javv_formato_informe_vehiculos" model="report.paperformat">
         <field name="name">Formato Informe Vehículos JAVV</field>
         <field name="default" eval="False"/>
@@ -17,33 +17,29 @@
         <field name="dpi">200</field>
     </record>
 
-    <!-- 2) ACCIÓN DE INFORME -->
+    <!-- ACCIÓN INFORME -->
     <record id="javv_informe_vehiculos_report" model="ir.actions.report">
         <field name="name">Informe de Vehículos</field>
         <field name="model">javv.vehiculos</field>
         <field name="report_type">qweb-pdf</field>
-        <!-- Template principal definido más abajo -->
         <field name="report_name">javv_modulo_vehiculos.informe_vehiculos_template</field>
         <field name="report_file">javv_modulo_vehiculos.informe_vehiculos_template</field>
-
-        <!-- Vincular con paper format -->
+        <!-- paperformat -->
         <field name="paperformat_id" ref="javv_formato_informe_vehiculos"/>
         <field name="print_report_name">'Informe_Vehiculos_Seleccionados'</field>
 
-        <!-- Hacer que aparezca en el botón “Imprimir” del modelo javv.vehiculos -->
+        <!-- Para que aparezca el botón imprimir. -->
         <field name="binding_model_id" ref="model_javv_vehiculos"/>
         <field name="binding_type">report</field>
     </record>
 
-    <!-- 3) PLANTILLA PRINCIPAL DE INFORME -->
+    <!-- Plantilla principal. -->
     <template id="informe_vehiculos_template">
-        <!-- docs será el recordset de “javv.vehiculos” que el usuario haya seleccionado -->
         <t t-foreach="docs" t-as="vehiculo">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
 
                     <div class="page" style="font-size:25px;">
-                        <!-- Encabezado con nombre y código -->
                         <h2 style="font-size: 35px;">
                             <span t-field="vehiculo.name"/>
                             (<span t-field="vehiculo.codigo"/>)
@@ -70,18 +66,18 @@
                             <span t-field="vehiculo.precio_semanal"/>
                         </p>
 
-                        <!-- Llamada a la subplantilla para los alquileres de este vehículo -->
+                        <!-- Llamo a la subplantilla para los alquileres de este vehículo -->
                         <t t-call="javv_modulo_vehiculos.informe_vehiculos_subtemplate_alquileres">
                             <t t-set="alquileres" t-value="vehiculo.alquileres_ids"/>
                         </t>
 
-                    </div><!-- .page -->
+                    </div>
                 </t>
             </t>
         </t>
     </template>
 
-    <!-- 4) SUBPLANTILLA PARA ALQUILERES -->
+    <!--  SUBPLANTILLA ALQUILERES -->
     <template id="informe_vehiculos_subtemplate_alquileres">
         <t t-if="alquileres">
             <h3>Alquileres:</h3>

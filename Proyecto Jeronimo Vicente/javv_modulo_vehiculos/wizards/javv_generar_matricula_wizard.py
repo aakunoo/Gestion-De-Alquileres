@@ -23,10 +23,8 @@ class javvGenerarMatriculaWizard(models.TransientModel):
 
         nueva_matricula = f"{self.numeros}{self.letras}".upper()
 
-        # Actualizar el vehículo
         self.vehiculo_id.write({'matricula': nueva_matricula})
 
-        # Cerrar wizard
         return {'type': 'ir.actions.act_window_close'}
 
     def action_cancelar(self):

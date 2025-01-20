@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Herencia de la plantilla principal del primer informe de Vehículos -->
+
     <template id="javv_informe_vehiculos_heredado"
               inherit_id="javv_modulo_vehiculos.informe_vehiculos_template">
-
-        <!-- Ajusta la ruta/ID de la plantilla que creaste en tu primer informe:
-             - “javv_modulo_vehiculos.informe_vehiculos_template”
-               o como la hayas nombrado en <template id="..."> -->
-
         <xpath expr="//div[@class='page']" position="inside">
-            <!-- Comprobamos si el vehículo está en_reparacion -->
             <t t-if="vehiculo.state == 'en_reparacion'">
                 <div style="margin-top: 30px;">
                     <h3 style="font-size: 50px; color: red;">

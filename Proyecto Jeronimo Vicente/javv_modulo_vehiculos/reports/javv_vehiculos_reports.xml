@@ -24,12 +24,9 @@
     <template id="report_vehiculos_main">
         <t t-call="web.external_layout">
             <div class="page" style="page-height:240mm; page-width:180mm; margin:22mm; page-orientation:portrait;">
-                <!-- Cabecera -->
                 <header style="margin-top:23mm;">
                     <h2 style="font-size: 20px; text-align: center;">Informe de Vehículo</h2>
                 </header>
-
-                <!-- Contenido del informe -->
                 <p><strong>Nombre:</strong> <span t-field="vehiculo.name"/></p>
                 <p><strong>Código:</strong> <span t-field="vehiculo.codigo"/></p>
                 <p><strong>Matrícula:</strong> <span t-field="vehiculo.matricula"/></p>
@@ -38,13 +35,13 @@
                 <p><strong>Precio Diario:</strong> <span t-field="vehiculo.precio_diario"/></p>
                 <p><strong>Precio Semanal:</strong> <span t-field="vehiculo.precio_semanal"/></p>
 
-                <!-- Llamada a la subplantilla -->
+                <!-- Llamo subplantilla -->
                 <t t-call="javv_modulo_vehiculos.report_alquileres_sub"/>
             </div>
         </t>
     </template>
 
-    <!-- Subplantilla para los alquileres -->
+    <!-- Subplantilla -->
     <template id="report_alquileres_sub">
         <table class="table table-sm" style="width: 100%; border-collapse: collapse;">
             <thead>

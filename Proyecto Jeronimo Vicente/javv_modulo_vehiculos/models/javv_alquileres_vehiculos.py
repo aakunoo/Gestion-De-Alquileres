@@ -37,6 +37,7 @@ class javv_alquileres_vehiculos(models.Model):
             #    record.decoration_state = 'rojo'
             #else:
              #   record.decoration_state = False
+
     # Relaciones
     vehiculo_id = fields.Many2one('javv.vehiculos', string="Vehículo", required=True)
     usuario_id = fields.Many2one('res.users', string="Usuario que gestiona", default=lambda self: self.env.user)

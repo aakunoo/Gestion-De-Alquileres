@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Acción para abrir la vista de Tipos de Vehículos -->
+    <!-- Acción para Tipos de Vehículos -->
     <record id="action_javv_tipos_vehiculos" model="ir.actions.act_window">
         <field name="name">Tipos de Vehículos</field>
         <field name="res_model">javv.tipos_vehiculos</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
-    <!-- Vista de lista (Tree) de Tipos de Vehículos -->
+    <!-- Vista Tree -->
     <record id="view_javv_tipos_vehiculos_tree" model="ir.ui.view">
         <field name="name">javv.tipos_vehiculos.tree</field>
         <field name="model">javv.tipos_vehiculos</field>
@@ -20,7 +20,7 @@
         </field>
     </record>
 
-    <!-- Vista de formulario de Tipos de Vehículos -->
+    <!-- Vista form -->
     <record id="view_javv_tipos_vehiculos_form" model="ir.ui.view">
         <field name="name">javv.tipos_vehiculos.form</field>
         <field name="model">javv.tipos_vehiculos</field>
@@ -59,7 +59,7 @@
         </field>
     </record>
 
-    <!-- Vista de búsqueda para Tipos de Vehículos -->
+    <!-- Vista búsqueda -->
     <record id="view_javv_tipos_vehiculos_search" model="ir.ui.view">
         <field name="name">javv.tipos_vehiculos.search</field>
         <field name="model">javv.tipos_vehiculos</field>
@@ -99,7 +99,7 @@
         </kanban>
     </field>
 </record>
-    <!-- Actualizar la acción de Tipos de Vehículos -->
+    <!-- Actualizar action -->
     <record id="action_javv_tipos_vehiculos" model="ir.actions.act_window">
         <field name="name">Tipos de Vehículos</field>
         <field name="res_model">javv.tipos_vehiculos</field>

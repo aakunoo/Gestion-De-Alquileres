@@ -6,7 +6,6 @@
         <field name="model">javv.clasificacion_energetica_wizard</field>
         <field name="arch" type="xml">
             <form string="Elegir Clasificación Energética">
-                <!-- Relación con el tipo de vehículo, oculto -->
                 <field name="tipo_vehiculo_id" invisible="1"/>
 
                 <group>
@@ -27,7 +26,7 @@
         </field>
     </record>
 
-    <!-- Acción para abrir este wizard en ventana modal -->
+    <!-- Acción para abrir este wizard en ventana -->
     <record id="action_javv_clasificacion_energetica_wizard" model="ir.actions.act_window">
         <field name="name">Elegir Clasificación</field>
         <field name="res_model">javv.clasificacion_energetica_wizard</field>

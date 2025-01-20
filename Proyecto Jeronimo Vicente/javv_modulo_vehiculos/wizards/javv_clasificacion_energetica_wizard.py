@@ -11,7 +11,6 @@ class javvClasificacionEnergeticaWizard(models.TransientModel):
         required=True
     )
 
-    # Lista desplegable con las 10 opciones indicadas
     opcion_combustible = fields.Selection([
         ('op1', 'Eléctrico de batería'),
         ('op2', 'Eléctrico de autonomía extendida'),
@@ -27,8 +26,8 @@ class javvClasificacionEnergeticaWizard(models.TransientModel):
 
     def action_aceptar(self):
         """
-        Asigna la clasificación energética (tipo_vehiculo_id.clasificacion_energetica)
-        según la opción elegida en opcion_combustible.
+        Asigna la clasificación energética según
+        la opción elegida en opcion_combustible.
         """
         self.ensure_one()
         if not self.opcion_combustible:
@@ -46,7 +45,6 @@ class javvClasificacionEnergeticaWizard(models.TransientModel):
         elif self.opcion_combustible == 'op10':
             clasif = 'sin_clasificar'
 
-        # Actualizar el tipo de vehículo
         self.tipo_vehiculo_id.write({'clasificacion_energetica': clasif})
 
         return {'type': 'ir.actions.act_window_close'}
