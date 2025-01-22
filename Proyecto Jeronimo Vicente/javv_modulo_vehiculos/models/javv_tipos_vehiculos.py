@@ -99,12 +99,8 @@ class javv_tipos_vehiculos(models.Model):
          - Info de environment: Usuario actual (nombre e id),
            Compañía, e idioma/lenguaje.
         """
-        # 1) Generar un número aleatorio entre 1 y 1000
         aleatorio = random.randint(1, 1000)
         nombre = f"tipo_ejemplo{aleatorio}"
-
-        # 2) Insertar registro vía SQL:
-        #    name, clasificacion_energetica=sin_clasificar, enganche_carro=False
         query = """
                 INSERT INTO javv_tipos_vehiculos (name, clasificacion_energetica, enganche_carro, create_uid, create_date, write_uid, write_date)
                 VALUES (%s, %s, %s, %s, %s, %s, %s)
@@ -114,18 +110,16 @@ class javv_tipos_vehiculos(models.Model):
             nombre,
             'sin_clasificar',
             False,
-            self.env.uid,  # create_uid
-            datetime.now(),  # create_date
-            self.env.uid,  # write_uid
-            datetime.now()  # write_date
+            self.env.uid,
+            datetime.now(),
+            self.env.uid,
+            datetime.now()
         ]
         self.env.cr.execute(query, vals)
-        new_id = self.env.cr.fetchone()[0]  # Obtener el id retornado
+        new_id = self.env.cr.fetchone()[0]
 
-        # 3) Leer el registro recién creado como un Recordset
         new_tipo = self.browse(new_id)
 
-        # 4) Recolectar información para UserError
         usuario_actual = self.env.user
         compania = self.env.company
         msg = (f"Registro creado:\n"
@@ -138,5 +132,4 @@ class javv_tipos_vehiculos(models.Model):
                f"  - Compañía: {compania.name}\n"
                f"  - Lenguaje: {usuario_actual.lang}\n")
 
-        # 5) Lanzar excepción con los datos
         raise UserError(msg)

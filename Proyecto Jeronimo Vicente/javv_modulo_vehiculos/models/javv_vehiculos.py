@@ -172,10 +172,8 @@ class javv_vehiculos(models.Model):
           2) Deja maletero=False en todos los vehículos seleccionados.
         """
         if not self:
-            # Si no se seleccionó nada
             raise UserError("No se han seleccionado vehículos.")
 
-        # 1) Recolectar información detallada
         lineas_info = []
         for veh in self:
             nombre_vehiculo = veh.name or "Sin nombre"
@@ -183,12 +181,10 @@ class javv_vehiculos(models.Model):
             fecha_fab = veh.fecha_fabricacion or "Sin fecha de fabricación"
             fecha_itv = veh.fecha_itv or "Sin fecha ITV"
 
-            # Tipo de vehículo y su clasif. energética
             tipo = veh.tipo_vehiculo_id
             nombre_tipo = tipo.name or "Sin tipo"
             clasif = tipo.clasificacion_energetica or "sin_clasificar"
 
-            # Construimos una línea de texto
             info_linea = (
                 f"Vehículo: {nombre_vehiculo}\n"
                 f"  - Matrícula: {matricula_veh}\n"
@@ -198,7 +194,7 @@ class javv_vehiculos(models.Model):
             )
             lineas_info.append(info_linea)
 
-        # 2) Suma de numero_alquileres y media de precio_diario
+        # Suma de numero_alquileres y media de precio_diario
         total_alquileres = sum(veh.numero_alquileres for veh in self)
         total_vehiculos = len(self)
         total_precio_diario = sum(veh.precio_diario for veh in self)
@@ -206,11 +202,9 @@ class javv_vehiculos(models.Model):
         if total_vehiculos > 0:
             media_precio = total_precio_diario / total_vehiculos
 
-        # 3) Modificar maletero a False
+        #  Modificar maletero
         self.write({'maletero': False})
 
-        # 4) Lanzar UserError con la información
-        # Construimos el mensaje final
         info_vehiculos = "\n".join(lineas_info)
         info_resumen = (
             f"\n---\n"

@@ -103,7 +103,7 @@ class javv_alquileres_vehiculos(models.Model):
                 if record.vehiculo_id.state != 'disponible':
                     raise ValidationError(f'El vehículo "{record.vehiculo_id.name}" no está disponible para alquilar.')
 
-            # Si el estado es "en_proceso", cambiar el estado del vehículo a "alquilado"
+            # sii estado es "en_proceso", cambiar a "alquilado"
             if record.state == 'en_proceso':
                 record.vehiculo_id.state = 'alquilado'
 
@@ -126,14 +126,14 @@ class javv_alquileres_vehiculos(models.Model):
     def action_comprobar_alquileres(self):
         for record in self:
             if record.state in ['facturado', 'cancelado']:
-                continue  # No cambiar estado si está facturado o cancelado
+                continue
             hoy = date.today()
             if hoy < record.fecha_inicio:
                 record.state = 'previo'
             elif record.fecha_inicio <= hoy <= record.fecha_fin:
                 record.state = 'en_proceso'
                 if record.vehiculo_id.state == 'disponible':
-                    record.vehiculo_id.state = 'alquilado'  # Cambiar estado del vehículo
+                    record.vehiculo_id.state = 'alquilado'
             elif hoy > record.fecha_fin:
                 record.state = 'terminado'
                 record.vehiculo_id.state = 'disponible'
@@ -141,7 +141,7 @@ class javv_alquileres_vehiculos(models.Model):
     def action_comprobar_estado_individual(self):
         for record in self:
             if record.state in ['facturado', 'cancelado']:
-                continue  # No cambiar estado si está facturado o cancelado
+                continue  # no cambia si esta facturado o cancelado
             hoy = date.today()
             if hoy < record.fecha_inicio:
                 record.state = 'previo'
@@ -164,7 +164,7 @@ class javv_alquileres_vehiculos(models.Model):
         """
         for record in self:
             if record.factura_id:
-                # Redirigir a la factura asociada
+                # Redirige a la factura asociada
                 return {
                     'type': 'ir.actions.act_window',
                     'name': 'Factura',
@@ -174,32 +174,31 @@ class javv_alquileres_vehiculos(models.Model):
                     'target': 'current',
                 }
             else:
-                # Lanzar error si no hay factura asociada
+                # si no hay factura asociada lanza error
                 raise UserError('No existe ninguna factura asociada a este alquiler.')
 
-    # Botón "Facturar alquiler"
+    # Boton "Facturar alquiler"
     def action_facturar_alquiler(self):
         for record in self:
-            # Validar que el alquiler esté en estado "terminado"
             if record.state != 'terminado':
                 raise ValidationError(
                     f'El alquiler debe estar en estado "Terminado" para facturarlo. Estado actual: {record.state}.'
                 )
 
-            # Crear la factura en el modelo account.move
+            # Crear la factura
             factura = self.env['account.move'].create({
-                'move_type': 'out_invoice',  # Factura de cliente
-                'partner_id': record.cliente_id.id,  # Cliente asociado al alquiler
-                'invoice_date': fields.Date.today(),  # Fecha actual
-                'journal_id': 1,  # Diario de ventas (asegúrate de que este ID sea válido)
+                'move_type': 'out_invoice',
+                'partner_id': record.cliente_id.id,
+                'invoice_date': fields.Date.today(),
+                'journal_id': 1,
                 'invoice_line_ids': [
-                    # Primera línea: Detalles del vehículo
+                    # detalles vehiculo
                     (0, 0, {
                         'name': f'{record.vehiculo_id.name} ({record.vehiculo_id.codigo}) - {record.duracion} días',
                         'quantity': 1,
                         'price_unit': record.precio_final,  # Precio total del alquiler
                     }),
-                    # Segunda línea: Gastos de seguro obligatorio
+                    # gastos de seguro obligatorio
                     (0, 0, {
                         'name': 'Gastos del seguro obligatorio',
                         'quantity': 1,
@@ -208,19 +207,18 @@ class javv_alquileres_vehiculos(models.Model):
                 ]
             })
 
-            # Publicar la factura
+            # Publicar factura
             factura.action_post()
 
-            # Relacionar la factura con el alquiler
+            # Relacionar factura con alquiler
             record.factura_id = factura.id
 
-            # Cambiar el estado del alquiler a "facturado"
+            # Cambiar estado del alquiler a "facturado"
             record.state = 'facturado'
 
     # Botón "Terminar alquiler"
     def action_terminar_alquiler(self):
         for record in self:
-            # Validar el estado actual
             if record.state == 'previo':
                 raise ValidationError('El alquiler aún no ha comenzado, no se puede facturar.')
             elif record.state == 'en_proceso':
@@ -228,24 +226,22 @@ class javv_alquileres_vehiculos(models.Model):
             elif record.state == 'cancelado':
                 raise ValidationError('El alquiler está cancelado, no se puede facturar.')
 
-            # Calcular la duración si aún no está definida
+            # Calcular duración si aun no está definida
             if not record.duracion:
                 record.duracion = (record.fecha_fin - record.fecha_inicio).days
 
-            # Calcular el precio final
+            # Calcular precio final
             if not record.precio_final:
                 record._compute_precio_final()
 
-            # Verificar valores críticos antes de continuar
             if record.duracion <= 0:
                 raise ValidationError('La duración del alquiler no es válida.')
             if record.precio_final <= 0:
                 raise ValidationError('El precio final no se ha calculado correctamente.')
 
-            # Cambiar el estado del alquiler
+            # Cambiar estado
             record.state = 'terminado'
 
-            # Cambiar el estado del vehículo a "Disponible"
             record.vehiculo_id.state = 'disponible'
 
     # Botón "Cancelar alquiler"
@@ -257,7 +253,7 @@ class javv_alquileres_vehiculos(models.Model):
             record.state = 'cancelado'
             record.vehiculo_id.state = 'disponible'
 
-    # Cálculo del precio final
+    # Calculo precio final
     @api.depends('duracion', 'vehiculo_id')
     def _compute_precio_final(self):
         for record in self:
