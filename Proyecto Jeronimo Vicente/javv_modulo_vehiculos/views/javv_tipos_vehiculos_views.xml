@@ -77,7 +77,7 @@
     <field name="name">javv.tipos.vehiculos.kanban</field>
     <field name="model">javv.tipos_vehiculos</field>
     <field name="arch" type="xml">
-        <kanban create="true" edit="true" draggable="true">
+        <kanban create="true" edit="true" records_draggable="true"> <!-- Revisar -->
             <field name="name"/>
             <field name="clasificacion_energetica"/>
             <field name="enganche_carro"/>

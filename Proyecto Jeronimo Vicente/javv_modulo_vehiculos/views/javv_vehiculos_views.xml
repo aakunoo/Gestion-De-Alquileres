@@ -123,7 +123,7 @@
                 <field name="fecha_fabricacion"/>
                 <field name="combustible"/>
                 <filter name="filter_berlina" string="Sólo Berlina" domain="[('tipo_vehiculo_id.name', '=', 'Berlina')]"/>
-                <filter name="filter_fecha_fabricacion" string="Fecha Fabricación" domain="[('fecha_fabricacion', '>=', (context_today()))]"/>
+              <!--  <filter name="filter_fecha_fabricacion" string="Fecha Fabricación" domain="[('fecha_fabricacion', '>=', (context_today()))]"/> -->
                 <group expand="1" string="Agrupar por">
                     <filter name="group_num_plazas" string="Número de Plazas" context="{'group_by': 'num_plazas'}"/>
                 </group>
@@ -136,7 +136,7 @@
     <field name="name">javv.vehiculos.kanban</field>
     <field name="model">javv.vehiculos</field>
     <field name="arch" type="xml">
-        <kanban default_group_by="tipo_vehiculo_id" create_group="true" quick_create="true" draggable="false">
+        <kanban default_group_by="tipo_vehiculo_id" create_group="true" quick_create="true" records_draggable="false">
             <field name="tipo_vehiculo_id"/>
             <field name="state"/>
             <field name="name"/>
