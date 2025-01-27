@@ -17,7 +17,7 @@ class javvGenerarMatriculaWizard(models.TransientModel):
         """
         Concatenar numeros + letras y actualizar la matrícula del vehículo.
         """
-        self.ensure_one()  # Asegura un único registro wizard
+        self.ensure_one()  # Asegura un unico registro wizard
         if not (self.numeros and self.letras):
             raise UserError("Debes indicar números y letras para generar la matrícula.")
 

@@ -26,7 +26,7 @@
         </field>
     </record>
 
-    <!-- Acción para abrir este wizard en ventana -->
+    <!-- Accion para abrir este wizard en ventana -->
     <record id="action_javv_clasificacion_energetica_wizard" model="ir.actions.act_window">
         <field name="name">Elegir Clasificación</field>
         <field name="res_model">javv.clasificacion_energetica_wizard</field>

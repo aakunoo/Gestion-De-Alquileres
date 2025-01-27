@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Vista Form del Wizard -->
     <record id="view_javv_generar_matricula_wizard" model="ir.ui.view">
         <field name="name">javv.generar_matricula_wizard.form</field>
         <field name="model">javv.generar_matricula_wizard</field>
         <field name="arch" type="xml">
             <form string="Generar Matrícula">
-                <!-- Campo vehículo oculto (relación) -->
+                <!-- campo vehiculo oculto (la relacion) -->
                 <field name="vehiculo_id" invisible="1"/>
 
                 <group>
@@ -35,6 +34,6 @@
         <field name="name">Generar Matrícula</field>
         <field name="res_model">javv.generar_matricula_wizard</field>
         <field name="view_mode">form</field>
-        <field name="target">new</field>  <!-- "new" para abrir en ventana -->
+        <field name="target">new</field>  <!-- new para asbrirlo en ventana -->
     </record>
 </odoo>

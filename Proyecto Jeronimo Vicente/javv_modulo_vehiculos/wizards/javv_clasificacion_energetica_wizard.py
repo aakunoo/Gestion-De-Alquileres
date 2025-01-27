@@ -35,7 +35,7 @@ class javvClasificacionEnergeticaWizard(models.TransientModel):
 
         clasif = 'sin_clasificar'
         if self.opcion_combustible in ['op1', 'op2', 'op3']:
-            clasif = '0'  # Opción “0”
+            clasif = '0'
         elif self.opcion_combustible in ['op4', 'op5']:
             clasif = 'eco'
         elif self.opcion_combustible in ['op6', 'op7']:
