@@ -116,11 +116,13 @@
         </field>
     </record>
 
-    <menuitem id="javv_submenu_generate_tipo_vehiculo"
+    <!-- DESCOMENTAR DESPUES DE INSTALAR EL MODULO-->
+
+    <!--<menuitem id="javv_submenu_generate_tipo_vehiculo"
               name="Generar tipo de vehiculo"
               parent="javv_menu_opciones"
               sequence="35"
-              action="javv_server_action_generar_tipo_vehiculo"/>
+              action="javv_server_action_generar_tipo_vehiculo"/>-->
 
 
 </odoo>
