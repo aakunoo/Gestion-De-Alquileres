@@ -123,9 +123,11 @@
                 <field name="fecha_fabricacion"/>
                 <field name="combustible"/>
                 <filter name="filter_berlina" string="Sólo Berlina" domain="[('tipo_vehiculo_id.name', '=', 'Berlina')]"/>
-              <!--  <filter name="filter_fecha_fabricacion" string="Fecha Fabricación" domain="[('fecha_fabricacion', '>=', (context_today()))]"/> -->
+                <!-- NO ME VA EL FILTRO, ME DA ERROR Y NO SE COMO SOLUCIONARLO. -->
+             <!-- <filter name="filter_fecha_fabricacion" string="Fecha Fabricación" domain="[('fecha_fabricacion', '>=', (context_today()))]"/>-->
                 <group expand="1" string="Agrupar por">
                     <filter name="group_num_plazas" string="Número de Plazas" context="{'group_by': 'num_plazas'}"/>
+
                 </group>
             </search>
         </field>
